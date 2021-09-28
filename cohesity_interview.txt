@@ -3,7 +3,8 @@
 
 2] Given 100 TB file with 4 byte integer data and 50GB memory, sort the data in the file. Disk space is unlimited.
 
-3] // Problem : Find the minimum number of dice rolls to go from 1 to n on a snakes and ladders board.
+3] Problem : Find the minimum number of dice rolls to go from 1 to n on a snakes and ladders board.
+- https://www.geeksforgeeks.org/snake-ladder-problem-2/
 
 4] write script to get the IP address from ifconfig output. Detect duplicate IPs.
 
