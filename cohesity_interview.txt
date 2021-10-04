@@ -11,3 +11,27 @@
 5] Oracle interview:
     - find closest to k in a binary search tree.
     
+
+6] Amazon interview question:
+
+deepcopy contents of list a to list b:
+
+struct Node {
+	char *data;
+	int dataLen;
+	struct Node *next;
+};
+
+
+a = {"abcd": 4}, {"efghij": 6], {"klmno": 5}
+
+b = {"lmnop": 5}, {"qrs": 3}, {"tuvwxyz": 8}
+
+after deepcopy b = {"abcde": 5}, {fgh": 3}, {"ijklmno": 7}
+int deepCopy(struct Node *a, struct Node*b)
+{
+	// copy all data from a to a vector<string>
+	// Then write it to be based on b->dataLen
+	
+	
+}
