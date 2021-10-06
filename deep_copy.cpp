@@ -44,6 +44,7 @@ struct Node *create(char *data, int length) {
     node->data = (char *)new char[length];
     memcpy(node->data, data, length);
     node->next = NULL;
+    node->dataLen = length;
     return node;
 }
 
@@ -69,41 +70,47 @@ struct Node * deepCopy1(struct Node *a, struct Node *b) {
     return b;
 }
 
-// copy a to b;
+/*
+ * deep copy using pointers
+ * find min_bytes_to_write with a and b
+ * use reader and writer pointers to a and b
+ * copy data from reader to writer 
+ * if a has written min_bytes_to_write
+ *     goto a->next node
+ * if b has written min_bytes_to_write
+ *     goto b->next node
+ */
+
 struct Node * deepCopy(struct Node *a, struct Node *b) {
 
     struct Node *aNode = a;
     struct Node *bNode = b;
     char *writer = bNode->data;
     const char *reader = aNode->data;
-    int remaining = bNode->dataLen;
+    int a_min_bytes_to_read = aNode->dataLen;
+    int b_min_bytes_to_write = bNode->dataLen;
+    int min_bytes_to_write = 0;
 
+    cout << "hi1" << endl;
     while (aNode != NULL) {
-        
-        if (aNode->dataLen == bNode->dataLen) {
-            memcpy(writer, reader, a->dataLen);
+        int min_bytes_to_write = min(a_min_bytes_to_read, b_min_bytes_to_write);
+        memcpy(writer, reader, min_bytes_to_write);
+        reader += min_bytes_to_write;
+        writer += min_bytes_to_write;
+        a_min_bytes_to_read -= min_bytes_to_write;
+        b_min_bytes_to_write -= min_bytes_to_write;
+
+    cout << "hi2" << endl;
+        if (a_min_bytes_to_read == 0) {
+            aNode = aNode->next;
+            reader = aNode->data;
+            a_min_bytes_to_read = aNode->dataLen;
+        }
+        if (b_min_bytes_to_write == 0) {
             bNode = bNode->next;
-            aNode = aNode->next;
-            if (aNode != NULL)
-                reader = aNode->data;
-            if (bNode != NULL)
-                writer = bNode->data;
+            writer = bNode->data;
+            b_min_bytes_to_write = bNode->dataLen;
         }
-
-        if (bNode->dataLen > aNode->dataLen) {
-            memcpy(writer, reader, aNode->dataLen);
-            aNode = aNode->next;
-            writer += aNode->dataLen;
-            if (aNode != NULL)
-                reader = aNode->data;
-
-        }
-
-        if (bNode->dataLen < aNode->dataLen) {
-
-        }
-
-
     }
     return b;
 }
