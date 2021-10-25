@@ -4,7 +4,6 @@
 
 
 #include <bits/stdc++.h>
-#define pb push_back
 
 using namespace std;
 
@@ -13,10 +12,7 @@ vector<vector<int> > g;
 
 void edge(int a, int b)
 {
-	g[a].pb(b);
-
-	// for undirected graph add this line
-	// g[b].pb(a);
+	g[a].push_back(b);
 }
 
 void bfs(int u)
